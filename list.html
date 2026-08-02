@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>발음 듣기</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 30px 20px;
+      font-family: sans-serif;
+      background: #f5f5f5;
+      box-sizing: border-box;
+    }
+    .item {
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 20px;
+      background: white;
+      border-radius: 12px;
+      padding: 15px 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+    }
+    .label {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    audio {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="list"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const files = params.get('files');   // 예: fayin_p04_yunmu1_a,fayin_p04_yunmu1_o
+    const labels = params.get('labels'); // 예: a,o,e
+
+    const listDiv = document.getElementById('list');
+
+    if (files && labels) {
+      const fileArr = files.split(',');
+      const labelArr = labels.split(',');
+
+      fileArr.forEach((file, i) => {
+        const item = document.createElement('div');
+        item.className = 'item';
+
+        const label = document.createElement('div');
+        label.className = 'label';
+        label.textContent = labelArr[i] || file;
+
+        const audio = document.createElement('audio');
+        audio.controls = true;
+        audio.src = file.trim() + '.mp3';
+
+        item.appendChild(label);
+        item.appendChild(audio);
+        listDiv.appendChild(item);
+      });
+    } else {
+      listDiv.textContent = '파일을 찾을 수 없습니다.';
+    }
+  </script>
+</body>
+</html>
