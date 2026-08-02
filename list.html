@@ -18,7 +18,8 @@
     }
     .item {
       width: 100%;
-      max-width: 400px;
+      min-width: 300px;
+      max-width: 420px;
       margin-bottom: 20px;
       background: white;
       border-radius: 12px;
@@ -34,6 +35,8 @@
     }
     audio {
       width: 100%;
+      min-width: 280px;
+      display: block;
     }
   </style>
 </head>
@@ -42,8 +45,8 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const files = params.get('files');   // 예: fayin_p04_yunmu1_a,fayin_p04_yunmu1_o
-    const labels = params.get('labels'); // 예: a,o,e
+    const files = params.get('files');
+    const labels = params.get('labels');
 
     const listDiv = document.getElementById('list');
 
@@ -73,4 +76,3 @@
   </script>
 </body>
 </html>
-
